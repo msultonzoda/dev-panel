@@ -1,0 +1,51 @@
+/* Reset only within .dp-root to avoid breaking host app styles */
+.dp-root {
+  font-family: var(--dp-font-family);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--dp-text-primary);
+  box-sizing: border-box;
+}
+
+.dp-root *,
+.dp-root *::before,
+.dp-root *::after {
+  box-sizing: inherit;
+}
+
+.dp-root button,
+.dp-root input {
+  font-family: inherit;
+  font-size: inherit;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+.dp-root button {
+  cursor: pointer;
+}
+
+.dp-root a {
+  color: var(--dp-accent);
+  text-decoration: none;
+}
+
+.dp-root ul,
+.dp-root ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dp-root h1,
+.dp-root h2,
+.dp-root h3,
+.dp-root h4,
+.dp-root h5,
+.dp-root h6,
+.dp-root p {
+  margin: 0;
+}

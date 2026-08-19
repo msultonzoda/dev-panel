@@ -1,0 +1,85 @@
+/* CSS Variables for Dev Panel */
+.dp-root {
+  /* Dark Theme (Default) */
+  --dp-bg-primary: #0f172a;
+  --dp-bg-secondary: #1e293b;
+  --dp-bg-header: rgba(15, 23, 42, 0.88);
+  --dp-bg-sidebar: rgba(15, 23, 42, 0.94);
+  --dp-bg-hover: rgba(255, 255, 255, 0.08);
+  --dp-bg-active: rgba(99, 102, 241, 0.16);
+  --dp-bg-pill: rgba(15, 23, 42, 0.92);
+  --dp-bg-tooltip: #1e293b;
+  --dp-bg-card: rgba(30, 41, 59, 0.7);
+
+  --dp-text-primary: #f8fafc;
+  --dp-text-secondary: #94a3b8;
+  --dp-text-muted: #64748b;
+
+  --dp-border: rgba(255, 255, 255, 0.1);
+  --dp-border-subtle: rgba(255, 255, 255, 0.05);
+  --dp-border-focus: #6366f1;
+
+  --dp-accent: #6366f1;
+  --dp-accent-hover: #818cf8;
+  --dp-accent-glow: rgba(99, 102, 241, 0.35);
+
+  --dp-error: #f43f5e;
+  --dp-error-bg: rgba(244, 63, 94, 0.12);
+  --dp-success: #10b981;
+  --dp-warning: #f59e0b;
+
+  --dp-font-family:
+    -apple-system, BlinkMacSystemFont, 'Inter',
+    'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+  --dp-shadow:
+    0 12px 24px -6px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  --dp-shadow-pill:
+    0 6px 15px -2px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 0 10px rgba(99, 102, 241, 0.25);
+
+  --dp-radius-modal: 16px;
+  --dp-radius-pill: 24px;
+  --dp-radius-item: 10px;
+  --dp-backdrop-blur: blur(20px);
+}
+
+.dp-root.dp-theme-light,
+#dev-panel-host.dp-theme-light .dp-root {
+  --dp-bg-primary: #ffffff;
+  --dp-bg-secondary: #f8fafc;
+  --dp-bg-header: rgba(255, 255, 255, 0.9);
+  --dp-bg-sidebar: rgba(248, 250, 252, 0.96);
+  --dp-bg-hover: rgba(0, 0, 0, 0.05);
+  --dp-bg-active: rgba(99, 102, 241, 0.1);
+  --dp-bg-pill: rgba(255, 255, 255, 0.96);
+  --dp-bg-tooltip: #0f172a;
+  --dp-bg-card: rgba(241, 245, 249, 0.8);
+
+  --dp-text-primary: #0f172a;
+  --dp-text-secondary: #475569;
+  --dp-text-muted: #94a3b8;
+
+  --dp-border: rgba(0, 0, 0, 0.08);
+  --dp-border-subtle: rgba(0, 0, 0, 0.04);
+  --dp-border-focus: #6366f1;
+
+  --dp-accent: #6366f1;
+  --dp-accent-hover: #4f46e5;
+  --dp-accent-glow: rgba(99, 102, 241, 0.25);
+
+  --dp-error: #e11d48;
+  --dp-error-bg: rgba(225, 29, 72, 0.08);
+  --dp-success: #059669;
+  --dp-warning: #d97706;
+
+  --dp-shadow:
+    0 25px 45px -10px rgba(15, 23, 42, 0.18),
+    0 0 0 1px rgba(0, 0, 0, 0.08);
+  --dp-shadow-pill:
+    0 12px 30px -4px rgba(15, 23, 42, 0.15),
+    0 0 0 1px rgba(0, 0, 0, 0.08),
+    0 0 18px rgba(99, 102, 241, 0.15);
+}
