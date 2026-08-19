@@ -7,11 +7,17 @@ export default defineConfig({
   plugins: [
     vue(),
     dts({
-      tsconfigPath: resolve(__dirname, 'tsconfig.json'),
-      outDir: resolve(__dirname, 'dist'),
+      tsconfigPath: resolve(
+        __dirname,
+        'tsconfig.json',
+      ),
+      outDirs: resolve(__dirname, 'dist'),
       entryRoot: resolve(__dirname, 'src'),
       include: ['src'],
-      exclude: ['src/**/__tests__/**', 'src/**/*.spec.ts'],
+      exclude: [
+        'src/**/__tests__/**',
+        'src/**/*.spec.ts',
+      ],
       cleanVueFileName: true,
     }),
   ],
@@ -24,7 +30,10 @@ export default defineConfig({
     lib: {
       entry: {
         index: resolve(__dirname, 'src/index.ts'),
-        'trigger/index': resolve(__dirname, 'src/trigger/index.ts'),
+        'trigger/index': resolve(
+          __dirname,
+          'src/trigger/index.ts',
+        ),
       },
       formats: ['es'],
     },
@@ -43,4 +52,3 @@ export default defineConfig({
     minify: false,
   },
 });
-

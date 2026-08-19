@@ -352,9 +352,7 @@ const applyFlags = (
     <!-- Header -->
     <div class="dp-ff-header">
       <div>
-        <h2 class="dp-ff-title">
-          Feature Flags
-        </h2>
+        <h2 class="dp-ff-title">Feature Flags</h2>
         <p class="dp-ff-desc">
           Toggle and test experimental features
           live
@@ -363,22 +361,22 @@ const applyFlags = (
 
       <div class="dp-ff-counter">
         <span class="dp-pulse-dot" />
-        <span>{{ activeCount }} /
-          {{ totalCount }} active</span>
+        <span
+          >{{ activeCount }} /
+          {{ totalCount }} active</span
+        >
       </div>
     </div>
 
     <!-- Toast Alert -->
     <div
       v-if="showSuccessAlert"
-      class="dp-ff-toast"
-    >
+      class="dp-ff-toast">
       <svg
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="2.5"
-      >
+        stroke-width="2.5">
         <polyline points="20 6 9 17 4 12" />
       </svg>
       <span>{{ alertMessage }}</span>
@@ -392,32 +390,27 @@ const applyFlags = (
           fill="none"
           stroke="currentColor"
           stroke-width="2"
-          class="dp-search-icon"
-        >
+          class="dp-search-icon">
           <circle
             cx="11"
             cy="11"
-            r="8"
-          />
+            r="8" />
           <line
             x1="21"
             y1="21"
             x2="16.65"
-            y2="16.65"
-          />
+            y2="16.65" />
         </svg>
         <input
           v-model="searchQuery"
           type="text"
           placeholder="Search flags by name or key..."
-          class="dp-search-input"
-        >
+          class="dp-search-input" />
         <button
           v-if="searchQuery"
           type="button"
           class="dp-btn-clear-search"
-          @click="searchQuery = ''"
-        >
+          @click="searchQuery = ''">
           ✕
         </button>
       </div>
@@ -430,8 +423,7 @@ const applyFlags = (
             'dp-filter-active':
               activeFilter === 'all',
           }"
-          @click="activeFilter = 'all'"
-        >
+          @click="activeFilter = 'all'">
           All ({{ totalCount }})
         </button>
         <button
@@ -441,8 +433,7 @@ const applyFlags = (
             'dp-filter-active':
               activeFilter === 'active',
           }"
-          @click="activeFilter = 'active'"
-        >
+          @click="activeFilter = 'active'">
           Active ({{ activeCount }})
         </button>
         <button
@@ -452,8 +443,7 @@ const applyFlags = (
             'dp-filter-active':
               activeFilter === 'modified',
           }"
-          @click="activeFilter = 'modified'"
-        >
+          @click="activeFilter = 'modified'">
           Modified ({{ modifiedCount }})
         </button>
       </div>
@@ -462,8 +452,7 @@ const applyFlags = (
     <!-- Empty Search State -->
     <div
       v-if="filteredFlags.length === 0"
-      class="dp-empty-state"
-    >
+      class="dp-empty-state">
       <p>
         No feature flags found matching your
         filter.
@@ -473,15 +462,13 @@ const applyFlags = (
     <!-- Grouped Flags List -->
     <div
       v-else
-      class="dp-groups-list"
-    >
+      class="dp-groups-list">
       <div
         v-for="(
           flagsInGroup, groupName
         ) in groupedFlags"
         :key="groupName"
-        class="dp-flag-group"
-      >
+        class="dp-flag-group">
         <h3 class="dp-group-title">
           <span>{{ groupName }}</span>
           <span class="dp-group-count">{{
@@ -503,8 +490,7 @@ const applyFlags = (
               flag.type !== 'string'
                 ? toggleFlag(flag)
                 : undefined
-            "
-          >
+            ">
             <!-- Flag Left Details -->
             <div class="dp-flag-main">
               <div class="dp-flag-title-row">
@@ -516,29 +502,26 @@ const applyFlags = (
                     JSON.stringify(
                       localValues[flag.key],
                     ) !==
-                      JSON.stringify(
-                        flag.defaultValue,
-                      )
+                    JSON.stringify(
+                      flag.defaultValue,
+                    )
                   "
                   class="dp-tag-modified"
-                  title="Overridden from default"
-                >
+                  title="Overridden from default">
                   MODIFIED
                 </span>
                 <span
                   v-if="
                     flag.tags?.includes('custom')
                   "
-                  class="dp-tag-custom"
-                >
+                  class="dp-tag-custom">
                   CUSTOM
                 </span>
               </div>
 
               <p
                 v-if="flag.description"
-                class="dp-flag-desc"
-              >
+                class="dp-flag-desc">
                 {{ flag.description }}
               </p>
 
@@ -550,17 +533,15 @@ const applyFlags = (
             <!-- Flag Right Control -->
             <div
               class="dp-flag-control"
-              @click.stop
-            >
+              @click.stop>
               <!-- Options Select for Multivariate / String Flags -->
               <div
                 v-if="
                   flag.type === 'string' &&
-                    flag.options &&
-                    flag.options.length > 0
+                  flag.options &&
+                  flag.options.length > 0
                 "
-                class="dp-select-wrapper"
-              >
+                class="dp-select-wrapper">
                 <select
                   :value="
                     String(
@@ -576,13 +557,11 @@ const applyFlags = (
                         $event.target as HTMLSelectElement
                       ).value,
                     )
-                  "
-                >
+                  ">
                   <option
                     v-for="opt in flag.options"
                     :key="String(opt.value)"
-                    :value="String(opt.value)"
-                  >
+                    :value="String(opt.value)">
                     {{ opt.label }}
                   </option>
                 </select>
@@ -598,8 +577,7 @@ const applyFlags = (
                     localValues[flag.key],
                   ),
                 }"
-                @click="toggleFlag(flag)"
-              >
+                @click="toggleFlag(flag)">
                 <span class="dp-switch-knob" />
               </button>
 
@@ -616,8 +594,7 @@ const applyFlags = (
                     flag.key,
                     $event,
                   )
-                "
-              >
+                ">
                 ✕
               </button>
             </div>
@@ -629,29 +606,24 @@ const applyFlags = (
     <!-- Add Custom Flag Box -->
     <div
       v-if="options.allowCustomFlags !== false"
-      class="dp-add-flag-card"
-    >
+      class="dp-add-flag-card">
       <form
         class="dp-add-flag-form"
-        @submit.prevent="addCustomFlag"
-      >
+        @submit.prevent="addCustomFlag">
         <input
           v-model="newFlagKey"
           type="text"
           placeholder="Flag key (e.g. 'new_checkout')"
-          class="dp-input-key"
-        >
+          class="dp-input-key" />
         <input
           v-model="newFlagName"
           type="text"
           placeholder="Display Name"
-          class="dp-input-name"
-        >
+          class="dp-input-name" />
         <button
           type="submit"
           class="dp-btn-add-flag"
-          :disabled="!newFlagKey.trim()"
-        >
+          :disabled="!newFlagKey.trim()">
           + Add Flag
         </button>
       </form>
@@ -665,8 +637,7 @@ const applyFlags = (
             v-model="persistAcrossReloads"
             type="checkbox"
             class="dp-checkbox-native"
-            @change="onPersistToggle"
-          >
+            @change="onPersistToggle" />
           <span>Persist in LocalStorage</span>
         </label>
 
@@ -674,8 +645,7 @@ const applyFlags = (
           type="button"
           class="dp-btn-reset"
           title="Reset all flags to default values"
-          @click="resetToDefaults"
-        >
+          @click="resetToDefaults">
           Reset Defaults
         </button>
       </div>
@@ -684,14 +654,12 @@ const applyFlags = (
         <button
           type="button"
           class="dp-btn-primary"
-          @click="applyFlags(true, false)"
-        >
+          @click="applyFlags(true, false)">
           <svg
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2.5"
-          >
+            stroke-width="2.5">
             <polyline points="20 6 9 17 4 12" />
           </svg>
           <span>Apply Flags</span>
@@ -701,17 +669,14 @@ const applyFlags = (
           type="button"
           class="dp-btn-secondary"
           title="Apply flags and reload application"
-          @click="applyFlags(true, true)"
-        >
+          @click="applyFlags(true, true)">
           <svg
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-          >
+            stroke-width="2">
             <path
-              d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"
-            />
+              d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
           </svg>
           <span>Apply & Reload</span>
         </button>

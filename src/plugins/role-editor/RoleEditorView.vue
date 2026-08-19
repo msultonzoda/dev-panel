@@ -399,31 +399,32 @@ const applyRoles = (
         </h2>
         <p
           v-if="options.storePath"
-          class="dp-target-hint"
-        >
+          class="dp-target-hint">
           Injecting into
-          <code>store.{{ options.storePath }}</code>
+          <code
+            >store.{{ options.storePath }}</code
+          >
         </p>
       </div>
 
       <div class="dp-active-counter">
         <span class="dp-pulse-dot" />
-        <span>{{ selectedCount }} /
-          {{ totalCount }} active</span>
+        <span
+          >{{ selectedCount }} /
+          {{ totalCount }} active</span
+        >
       </div>
     </div>
 
     <!-- Success Toast -->
     <div
       v-if="showSuccessAlert"
-      class="dp-toast"
-    >
+      class="dp-toast">
       <svg
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="2.5"
-      >
+        stroke-width="2.5">
         <polyline points="20 6 9 17 4 12" />
       </svg>
       <span>{{ alertMessage }}</span>
@@ -431,21 +432,21 @@ const applyRoles = (
 
     <!-- Toolbar: Quick Actions -->
     <div class="dp-toolbar">
-      <span class="dp-toolbar-label">Select roles to activate:</span>
+      <span class="dp-toolbar-label"
+        >Select roles to activate:</span
+      >
       <div class="dp-toolbar-actions">
         <button
           type="button"
           class="dp-btn-link"
-          @click="selectAll"
-        >
+          @click="selectAll">
           Select All
         </button>
         <span class="dp-sep">/</span>
         <button
           type="button"
           class="dp-btn-link"
-          @click="deselectAll"
-        >
+          @click="deselectAll">
           Clear
         </button>
       </div>
@@ -461,16 +462,14 @@ const applyRoles = (
           'dp-role-card-active':
             selectedRoleIds.includes(role.id),
         }"
-        @click="toggleRole(role.id)"
-      >
+        @click="toggleRole(role.id)">
         <!-- Checkbox -->
         <div
           class="dp-check-box"
           :class="{
             'dp-check-active':
               selectedRoleIds.includes(role.id),
-          }"
-        >
+          }">
           <svg
             v-if="
               selectedRoleIds.includes(role.id)
@@ -478,8 +477,7 @@ const applyRoles = (
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="3"
-          >
+            stroke-width="3">
             <polyline points="20 6 9 17 4 12" />
           </svg>
         </div>
@@ -493,23 +491,21 @@ const applyRoles = (
             <span
               v-if="
                 role.badge &&
-                  role.badge !==
+                role.badge !==
                   role.name.toUpperCase()
               "
               class="dp-role-badge"
               :class="{
                 'dp-badge-custom':
                   role.badge === 'CUSTOM',
-              }"
-            >
+              }">
               {{ role.badge }}
             </span>
           </div>
 
           <span
             v-if="role.description"
-            class="dp-role-desc"
-          >
+            class="dp-role-desc">
             {{ role.description }}
           </span>
         </div>
@@ -522,8 +518,7 @@ const applyRoles = (
           title="Remove custom role"
           @click="
             removeCustomRole(role.id, $event)
-          "
-        >
+          ">
           ✕
         </button>
       </div>
@@ -532,23 +527,19 @@ const applyRoles = (
     <!-- Minimalist Add Custom Role Form -->
     <div
       v-if="options.allowCustomRoles !== false"
-      class="dp-add-box"
-    >
+      class="dp-add-box">
       <form
         class="dp-add-form"
-        @submit.prevent="addCustomRole"
-      >
+        @submit.prevent="addCustomRole">
         <input
           v-model="newRoleInput"
           type="text"
           placeholder="+ Add custom role..."
-          class="dp-add-input"
-        >
+          class="dp-add-input" />
         <button
           type="submit"
           class="dp-btn-add-mini"
-          :disabled="!newRoleInput.trim()"
-        >
+          :disabled="!newRoleInput.trim()">
           Add
         </button>
       </form>
@@ -561,8 +552,7 @@ const applyRoles = (
           v-model="persistAcrossReloads"
           type="checkbox"
           class="dp-checkbox-native"
-          @change="onPersistToggle"
-        >
+          @change="onPersistToggle" />
         <span>Persist in LocalStorage</span>
       </label>
 
@@ -570,14 +560,12 @@ const applyRoles = (
         <button
           type="button"
           class="dp-btn-primary"
-          @click="applyRoles(true, false)"
-        >
+          @click="applyRoles(true, false)">
           <svg
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2.5"
-          >
+            stroke-width="2.5">
             <polyline points="20 6 9 17 4 12" />
           </svg>
           <span>Apply Roles</span>
@@ -587,17 +575,14 @@ const applyRoles = (
           type="button"
           class="dp-btn-secondary"
           title="Apply roles and reload application"
-          @click="applyRoles(true, true)"
-        >
+          @click="applyRoles(true, true)">
           <svg
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-          >
+            stroke-width="2">
             <path
-              d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"
-            />
+              d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
           </svg>
           <span>Apply & Reload</span>
         </button>

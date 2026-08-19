@@ -181,34 +181,29 @@ const copyDiagnostics = async () => {
         class="dp-btn-copy"
         :class="{ 'dp-btn-copied': copied }"
         title="Copy full diagnostic report as JSON"
-        @click="copyDiagnostics"
-      >
+        @click="copyDiagnostics">
         <svg
           v-if="!copied"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          stroke-width="2"
-        >
+          stroke-width="2">
           <rect
             x="9"
             y="9"
             width="13"
             height="13"
             rx="2"
-            ry="2"
-          />
+            ry="2" />
           <path
-            d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
-          />
+            d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
         </svg>
         <svg
           v-else
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
-          stroke-width="2"
-        >
+          stroke-width="2">
           <polyline points="20 6 9 17 4 12" />
         </svg>
         <span>{{
@@ -222,14 +217,18 @@ const copyDiagnostics = async () => {
     <!-- Quick Stats Grid -->
     <div class="dp-stats-grid">
       <div class="dp-stat-card">
-        <span class="dp-stat-label">Viewport</span>
+        <span class="dp-stat-label"
+          >Viewport</span
+        >
         <span class="dp-stat-val">{{
           viewportSize
         }}</span>
       </div>
 
       <div class="dp-stat-card">
-        <span class="dp-stat-label">Pixel Ratio</span>
+        <span class="dp-stat-label"
+          >Pixel Ratio</span
+        >
         <span class="dp-stat-val">{{
           pixelRatio
         }}</span>
@@ -237,8 +236,7 @@ const copyDiagnostics = async () => {
 
       <div
         v-if="memoryUsage"
-        class="dp-stat-card"
-      >
+        class="dp-stat-card">
         <span class="dp-stat-label">JS Heap</span>
         <span class="dp-stat-val">{{
           memoryUsage.used
@@ -246,8 +244,12 @@ const copyDiagnostics = async () => {
       </div>
 
       <div class="dp-stat-card">
-        <span class="dp-stat-label">LocalStorage</span>
-        <span class="dp-stat-val">{{ storageItemsCount }} keys</span>
+        <span class="dp-stat-label"
+          >LocalStorage</span
+        >
+        <span class="dp-stat-val"
+          >{{ storageItemsCount }} keys</span
+        >
       </div>
     </div>
 
@@ -260,28 +262,24 @@ const copyDiagnostics = async () => {
           stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
-          stroke-linejoin="round"
-        >
+          stroke-linejoin="round">
           <rect
             x="2"
             y="3"
             width="20"
             height="14"
             rx="2"
-            ry="2"
-          />
+            ry="2" />
           <line
             x1="8"
             y1="21"
             x2="16"
-            y2="21"
-          />
+            y2="21" />
           <line
             x1="12"
             y1="17"
             x2="12"
-            y2="21"
-          />
+            y2="21" />
         </svg>
         <span>Display & Browser Specs</span>
       </div>
@@ -290,8 +288,7 @@ const copyDiagnostics = async () => {
         <div
           v-for="item in clientDiagnostics"
           :key="item.label"
-          class="dp-info-row"
-        >
+          class="dp-info-row">
           <span class="dp-info-label">{{
             item.label
           }}</span>
@@ -305,8 +302,7 @@ const copyDiagnostics = async () => {
     <!-- Application & Build Metadata Card -->
     <div
       v-if="Object.keys(buildInfo).length > 0"
-      class="dp-card"
-    >
+      class="dp-card">
       <div class="dp-card-header">
         <svg
           viewBox="0 0 24 24"
@@ -314,20 +310,16 @@ const copyDiagnostics = async () => {
           stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
-          stroke-linejoin="round"
-        >
+          stroke-linejoin="round">
           <path
-            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
-          />
+            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
           <polyline
-            points="3.27 6.96 12 12.01 20.73 6.96"
-          />
+            points="3.27 6.96 12 12.01 20.73 6.96" />
           <line
             x1="12"
             y1="22.08"
             x2="12"
-            y2="12"
-          />
+            y2="12" />
         </svg>
         <span>App & Build Metadata</span>
       </div>
@@ -336,8 +328,7 @@ const copyDiagnostics = async () => {
         <div
           v-for="(value, key) in buildInfo"
           :key="key"
-          class="dp-info-row"
-        >
+          class="dp-info-row">
           <span class="dp-info-label">{{
             key
           }}</span>
@@ -357,22 +348,18 @@ const copyDiagnostics = async () => {
           stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
-          stroke-linejoin="round"
-        >
+          stroke-linejoin="round">
           <circle
             cx="12"
             cy="12"
-            r="10"
-          />
+            r="10" />
           <line
             x1="2"
             y1="12"
             x2="22"
-            y2="12"
-          />
+            y2="12" />
           <path
-            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-          />
+            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
         </svg>
         <span>Raw User Agent</span>
       </div>

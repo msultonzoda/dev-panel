@@ -24,8 +24,7 @@ const getInitials = (name: string) => {
   <!-- eslint-disable vue/no-v-html -->
   <nav
     class="dp-sidebar"
-    aria-label="Plugins Navigation"
-  >
+    aria-label="Plugins Navigation">
     <div class="dp-nav-list">
       <div
         v-for="plugin in plugins"
@@ -41,14 +40,12 @@ const getInitials = (name: string) => {
         @click="$emit('select', plugin.name)"
         @keydown.enter="
           $emit('select', plugin.name)
-        "
-      >
+        ">
         <div class="dp-nav-icon">
           <template v-if="plugin.icon">
             <span
               class="dp-svg-wrapper"
-              v-html="plugin.icon"
-            />
+              v-html="plugin.icon" />
           </template>
           <template v-else>
             <span class="dp-nav-initials">{{
@@ -68,8 +65,7 @@ const getInitials = (name: string) => {
     <div
       v-if="version"
       class="dp-sidebar-footer"
-      :title="'App Version: ' + version"
-    >
+      :title="'App Version: ' + version">
       <span class="dp-version-text">{{
         version.startsWith('v')
           ? version

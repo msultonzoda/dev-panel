@@ -13,7 +13,10 @@ const increment = () => {
   lastAction.value = `Counter incremented to ${counter.value}`;
 
   if (window.__devPanelBus) {
-    window.__devPanelBus.emit('app:action', { action: 'increment', value: counter.value });
+    window.__devPanelBus.emit('app:action', {
+      action: 'increment',
+      value: counter.value,
+    });
   }
 };
 </script>
@@ -21,32 +24,39 @@ const increment = () => {
 <template>
   <div class="app-container">
     <header class="hero-section">
-      <div class="badge">
-        Demo Environment
-      </div>
+      <div class="badge">Demo Environment</div>
       <h1>Host Application</h1>
       <p class="subtitle">
         Simulated host application with integrated
         <strong>Dev Panel</strong>.
       </p>
       <div class="shortcut-tip">
-        Press <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>D</kbd> (or click the floating pill) to toggle
-        the Dev Panel.
+        Press <kbd>Ctrl</kbd> + <kbd>Alt</kbd> +
+        <kbd>D</kbd> (or click the floating pill)
+        to toggle the Dev Panel.
       </div>
     </header>
 
     <div class="state-card">
       <h3>Host App State Simulator</h3>
       <div class="counter-display">
-        <span class="counter-label">Counter Value</span>
-        <span class="counter-number">{{ counter }}</span>
+        <span class="counter-label">
+          Counter Value
+        </span>
+        <span class="counter-number">{{
+          counter
+        }}</span>
       </div>
       <div class="btn-group">
-        <button class="primary-btn" @click="increment">
+        <button
+          class="primary-btn"
+          @click="increment">
           Increment Counter (+1)
         </button>
       </div>
-      <p v-if="lastAction" class="last-action">
+      <p
+        v-if="lastAction"
+        class="last-action">
         ⚡ {{ lastAction }}
       </p>
     </div>
@@ -58,7 +68,9 @@ const increment = () => {
   max-width: 720px;
   margin: 60px auto;
   padding: 0 24px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Inter',
+    'Segoe UI', Roboto, sans-serif;
   color: #1e293b;
 }
 

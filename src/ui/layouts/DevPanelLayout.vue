@@ -98,13 +98,11 @@ const selectPlugin = (name: string) => {
 <template>
   <DevPanelModal
     :is-open="state.isOpen"
-    @close="handleClose"
-  >
+    @close="handleClose">
     <template v-if="!state.isAuthenticated">
       <AuthModal
         :is-loading="state.isLoading"
-        @success="handleAuthSuccess"
-      />
+        @success="handleAuthSuccess" />
     </template>
 
     <template v-else-if="state.isLoading">
@@ -123,25 +121,21 @@ const selectPlugin = (name: string) => {
             stroke="currentColor"
             stroke-width="2"
             stroke-linecap="round"
-            stroke-linejoin="round"
-          >
+            stroke-linejoin="round">
             <circle
               cx="12"
               cy="12"
-              r="10"
-            />
+              r="10" />
             <line
               x1="12"
               y1="8"
               x2="12"
-              y2="12"
-            />
+              y2="12" />
             <line
               x1="12"
               y1="16"
               x2="12.01"
-              y2="16"
-            />
+              y2="16" />
           </svg>
         </div>
         <div class="dp-error-code">
@@ -159,14 +153,12 @@ const selectPlugin = (name: string) => {
           :plugins="plugins"
           :active-plugin="state.activePlugin"
           :version="appVersion"
-          @select="selectPlugin"
-        />
+          @select="selectPlugin" />
 
         <main class="dp-content-area">
           <div
             v-if="!activeComponent"
-            class="dp-empty-state"
-          >
+            class="dp-empty-state">
             <div class="dp-empty-icon">
               <svg
                 viewBox="0 0 24 24"
@@ -174,28 +166,24 @@ const selectPlugin = (name: string) => {
                 stroke="currentColor"
                 stroke-width="1.5"
                 stroke-linecap="round"
-                stroke-linejoin="round"
-              >
+                stroke-linejoin="round">
                 <rect
                   x="3"
                   y="3"
                   width="18"
                   height="18"
                   rx="2"
-                  ry="2"
-                />
+                  ry="2" />
                 <line
                   x1="3"
                   y1="9"
                   x2="21"
-                  y2="9"
-                />
+                  y2="9" />
                 <line
                   x1="9"
                   y1="21"
                   x2="9"
-                  y2="9"
-                />
+                  y2="9" />
               </svg>
             </div>
             <p>
@@ -206,8 +194,7 @@ const selectPlugin = (name: string) => {
             v-else
             :plugin-name="
               state.activePlugin || 'unknown'
-            "
-          >
+            ">
             <component :is="activeComponent" />
           </PluginErrorBoundary>
         </main>

@@ -8,5 +8,6 @@
   "endOfLine": "lf",
   "singleAttributePerLine": true,
   "vueIndentScriptAndStyle": false,
-  "bracketSameLine": false
+  "bracketSameLine": true,
+  "bracketSpacing": true
 }

@@ -133,44 +133,37 @@ onUnmounted(() => {
             stroke="currentColor"
             stroke-width="2"
             stroke-linecap="round"
-            stroke-linejoin="round"
-          >
+            stroke-linejoin="round">
             <circle
               cx="11"
               cy="11"
-              r="8"
-            />
+              r="8" />
             <line
               x1="21"
               y1="21"
               x2="16.65"
-              y2="16.65"
-            />
+              y2="16.65" />
           </svg>
           <input
             v-model="searchQuery"
             type="text"
-            placeholder="Filter events or payload..."
-          >
+            placeholder="Filter events or payload..." />
         </div>
 
         <button
           class="dp-clear-btn"
           title="Clear all logs"
-          @click="clearLogs"
-        >
+          @click="clearLogs">
           <svg
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
             stroke-width="2"
             stroke-linecap="round"
-            stroke-linejoin="round"
-          >
+            stroke-linejoin="round">
             <polyline points="3 6 5 6 21 6" />
             <path
-              d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-            />
+              d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
           </svg>
           <span>Clear</span>
         </button>
@@ -180,27 +173,23 @@ onUnmounted(() => {
     <div class="dp-log-list">
       <div
         v-if="filteredLogs.length === 0"
-        class="dp-log-empty"
-      >
+        class="dp-log-empty">
         <svg
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
           stroke-width="1.5"
           stroke-linecap="round"
-          stroke-linejoin="round"
-        >
+          stroke-linejoin="round">
           <circle
             cx="12"
             cy="12"
-            r="10"
-          />
+            r="10" />
           <line
             x1="8"
             y1="12"
             x2="16"
-            y2="12"
-          />
+            y2="12" />
         </svg>
         <p>
           {{
@@ -214,8 +203,7 @@ onUnmounted(() => {
       <div
         v-for="log in filteredLogs"
         :key="log.id"
-        class="dp-log-entry"
-      >
+        class="dp-log-entry">
         <div class="dp-log-meta">
           <span class="dp-log-time">{{
             formatTime(log.time)
@@ -223,12 +211,12 @@ onUnmounted(() => {
           <span
             class="dp-log-event"
             :class="getEventColorClass(log.event)"
-          >{{ log.event }}</span>
+            >{{ log.event }}</span
+          >
         </div>
         <div
           v-if="log.payload !== undefined"
-          class="dp-log-payload"
-        >
+          class="dp-log-payload">
           <pre>{{
             JSON.stringify(log.payload, null, 2)
           }}</pre>

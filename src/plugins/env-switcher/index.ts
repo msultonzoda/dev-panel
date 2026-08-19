@@ -9,6 +9,7 @@ import type { EnvSwitcherOptions } from './types';
 
 export * from './types';
 export * from './helpers';
+export * from './useEnvSwitcher';
 
 export class EnvSwitcherPlugin implements DevPanelPlugin {
   name = 'Environment';

@@ -495,8 +495,7 @@ onUnmounted(() => {
         :class="{
           'dp-is-minimized': isMinimized,
           'dp-is-dragging': isDragging,
-        }"
-      >
+        }">
         <div
           class="dp-modal-window"
           :style="{
@@ -518,8 +517,7 @@ onUnmounted(() => {
             isMinimized
               ? handlePillClick()
               : undefined
-          "
-        >
+          ">
           <!-- Header Bar (or Collapsed Capsule Bar) -->
           <div
             class="dp-modal-header"
@@ -532,8 +530,7 @@ onUnmounted(() => {
               !isMinimized
                 ? handleTouchStart($event)
                 : undefined
-            "
-          >
+            ">
             <!-- Left title area / brand -->
             <div class="dp-header-left">
               <div class="dp-brand-badge">
@@ -545,14 +542,14 @@ onUnmounted(() => {
                   stroke="currentColor"
                   stroke-width="2.5"
                   stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+                  stroke-linejoin="round">
                   <polygon
                     points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"
-                    fill="currentColor"
-                  />
+                    fill="currentColor" />
                 </svg>
-                <span class="dp-modal-title">Dev Panel</span>
+                <span class="dp-modal-title"
+                  >Dev Panel</span
+                >
               </div>
             </div>
 
@@ -567,8 +564,7 @@ onUnmounted(() => {
                     : 'Minimize to pill'
                 "
                 aria-label="Toggle Minimize"
-                @click.stop="toggleMinimize"
-              >
+                @click.stop="toggleMinimize">
                 <svg
                   v-if="!isMinimized"
                   viewBox="0 0 24 24"
@@ -576,14 +572,12 @@ onUnmounted(() => {
                   stroke="currentColor"
                   stroke-width="2.5"
                   stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+                  stroke-linejoin="round">
                   <line
                     x1="5"
                     y1="12"
                     x2="19"
-                    y2="12"
-                  />
+                    y2="12" />
                 </svg>
                 <svg
                   v-else
@@ -592,26 +586,21 @@ onUnmounted(() => {
                   stroke="currentColor"
                   stroke-width="2.5"
                   stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+                  stroke-linejoin="round">
                   <polyline
-                    points="15 3 21 3 21 9"
-                  />
+                    points="15 3 21 3 21 9" />
                   <polyline
-                    points="9 21 3 21 3 15"
-                  />
+                    points="9 21 3 21 3 15" />
                   <line
                     x1="21"
                     y1="3"
                     x2="14"
-                    y2="10"
-                  />
+                    y2="10" />
                   <line
                     x1="3"
                     y1="21"
                     x2="10"
-                    y2="14"
-                  />
+                    y2="14" />
                 </svg>
               </button>
 
@@ -620,28 +609,24 @@ onUnmounted(() => {
                 class="dp-control-btn dp-close-btn"
                 title="Close panel (Esc)"
                 aria-label="Close Dev Panel"
-                @click.stop="emit('close')"
-              >
+                @click.stop="emit('close')">
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   stroke-width="2.5"
                   stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+                  stroke-linejoin="round">
                   <line
                     x1="18"
                     y1="6"
                     x2="6"
-                    y2="18"
-                  />
+                    y2="18" />
                   <line
                     x1="6"
                     y1="6"
                     x2="18"
-                    y2="18"
-                  />
+                    y2="18" />
                 </svg>
               </button>
             </div>
@@ -650,8 +635,7 @@ onUnmounted(() => {
           <!-- Body Content (Hidden when Minimized) -->
           <div
             v-show="!isMinimized"
-            class="dp-modal-body"
-          >
+            class="dp-modal-body">
             <slot />
           </div>
         </div>
