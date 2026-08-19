@@ -18,6 +18,7 @@ export { LocalStorageSessionAdapter } from './adapters/session/local-storage-ses
 export { StubAuthAdapter } from './adapters/auth/stub-auth-adapter';
 export { StaticConfigAdapter } from './adapters/config/static-config-adapter';
 export { KeyboardTriggerAdapter } from './adapters/trigger/keyboard-trigger-adapter';
+export { ConsoleTriggerAdapter, type ConsoleTriggerOptions } from './adapters/trigger/console-trigger-adapter';
 
 // UI
 export {
@@ -59,3 +60,4 @@ export {
   type CustomFlagItem,
   type FeatureFlagsOptions,
 } from './plugins/feature-flags';
+
