@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "type": "module",
   "description": "Extensible developer panel for web applications",
+  "homepage": "https://github.com/msultonzoda/dev-panel",
+  "author": {
+    "name": "Muhammadsakhi Sultonzoda",
+    "email": "msakhi.sultonzoda@gmail.com"
+  },
   "license": "MIT",
   "sideEffects": false,
   "main": "./dist/index.js",
