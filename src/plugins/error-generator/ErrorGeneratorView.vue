@@ -18,19 +18,25 @@ defineProps<{
 type ErrorType = 'sync' | 'async' | 'promise';
 
 const errorType = ref<ErrorType>('sync');
-const errorMessage = ref('Test Synchronous Error from DevPanel');
+const errorMessage = ref(
+  'Test Synchronous Error from DevPanel',
+);
 
 watch(errorType, (newType) => {
   if (newType === 'sync') {
-    errorMessage.value = 'Test Synchronous Error from DevPanel';
+    errorMessage.value =
+      'Test Synchronous Error from DevPanel';
   } else if (newType === 'async') {
-    errorMessage.value = 'Test Asynchronous Error from DevPanel';
+    errorMessage.value =
+      'Test Asynchronous Error from DevPanel';
   } else if (newType === 'promise') {
-    errorMessage.value = 'Test Unhandled Promise Rejection from DevPanel';
+    errorMessage.value =
+      'Test Unhandled Promise Rejection from DevPanel';
   }
 });
 
-const generateBtnRef = ref<HTMLButtonElement | null>(null);
+const generateBtnRef =
+  ref<HTMLButtonElement | null>(null);
 
 const handleNativeClick = () => {
   const msg = errorMessage.value;
@@ -46,11 +52,17 @@ const handleNativeClick = () => {
 };
 
 onMounted(() => {
-  generateBtnRef.value?.addEventListener('click', handleNativeClick);
+  generateBtnRef.value?.addEventListener(
+    'click',
+    handleNativeClick,
+  );
 });
 
 onBeforeUnmount(() => {
-  generateBtnRef.value?.removeEventListener('click', handleNativeClick);
+  generateBtnRef.value?.removeEventListener(
+    'click',
+    handleNativeClick,
+  );
 });
 </script>
 
@@ -86,16 +98,23 @@ onBeforeUnmount(() => {
               Error Type
             </h3>
             <p class="dp-setting-desc">
-              Select the type of error to generate.
+              Select the type of error to
+              generate.
             </p>
           </div>
           <select
             v-model="errorType"
             class="dp-input"
-            style="width: 100%; cursor: pointer;">
-            <option value="sync">Synchronous Error</option>
-            <option value="async">Asynchronous Error</option>
-            <option value="promise">Unhandled Promise Rejection</option>
+            style="width: 100%; cursor: pointer">
+            <option value="sync">
+              Synchronous Error
+            </option>
+            <option value="async">
+              Asynchronous Error
+            </option>
+            <option value="promise">
+              Unhandled Promise Rejection
+            </option>
           </select>
         </div>
 
@@ -128,7 +147,13 @@ onBeforeUnmount(() => {
           ref="generateBtnRef"
           type="button"
           class="dp-btn-primary dp-btn-danger"
-          style="width: 100%; padding: 12px; margin-top: 8px; justify-content: center; font-size: 14px;">
+          style="
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            justify-content: center;
+            font-size: 14px;
+          ">
           Generate Error
         </button>
       </div>
@@ -189,6 +214,14 @@ onBeforeUnmount(() => {
 }
 .dp-input:focus {
   border-color: var(--dp-primary-main, #3b82f6);
+}
+select.dp-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 36px;
 }
 .dp-btn-danger {
   padding: 6px 10px;
