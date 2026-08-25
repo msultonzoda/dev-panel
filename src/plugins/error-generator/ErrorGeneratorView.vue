@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {
   ref,
+  watch,
   onMounted,
   onBeforeUnmount,
 } from 'vue';
@@ -14,58 +15,50 @@ defineProps<{
   context: PluginContext;
 }>();
 
-const errorMessage = ref(
-  'Test Error from DevPanel',
-);
-const syncBtnRef = ref<HTMLButtonElement | null>(
-  null,
-);
+type ErrorType = 'sync' | 'async' | 'promise';
+
+const errorType = ref<ErrorType>('sync');
+const errorMessage = ref('Test Synchronous Error from DevPanel');
+
+watch(errorType, (newType) => {
+  if (newType === 'sync') {
+    errorMessage.value = 'Test Synchronous Error from DevPanel';
+  } else if (newType === 'async') {
+    errorMessage.value = 'Test Asynchronous Error from DevPanel';
+  } else if (newType === 'promise') {
+    errorMessage.value = 'Test Unhandled Promise Rejection from DevPanel';
+  }
+});
+
+const generateBtnRef = ref<HTMLButtonElement | null>(null);
 
 const handleNativeClick = () => {
-  throw new Error(
-    errorMessage.value ||
-      'Test Synchronous Error from DevPanel',
-  );
+  const msg = errorMessage.value;
+  if (errorType.value === 'sync') {
+    throw new Error(msg);
+  } else if (errorType.value === 'async') {
+    setTimeout(() => {
+      throw new Error(msg);
+    }, 100);
+  } else if (errorType.value === 'promise') {
+    Promise.reject(new Error(msg));
+  }
 };
 
 onMounted(() => {
-  // Навешиваем нативный обработчик, чтобы ошибка не перехватывалась
-  // Vue ErrorBoundary (onErrorCaptured) и улетала прямиком в Sentry/window.onerror
-  syncBtnRef.value?.addEventListener(
-    'click',
-    handleNativeClick,
-  );
+  generateBtnRef.value?.addEventListener('click', handleNativeClick);
 });
 
 onBeforeUnmount(() => {
-  syncBtnRef.value?.removeEventListener(
-    'click',
-    handleNativeClick,
-  );
+  generateBtnRef.value?.removeEventListener('click', handleNativeClick);
 });
-
-const throwAsyncError = () => {
-  setTimeout(() => {
-    throw new Error(
-      errorMessage.value ||
-        'Test Asynchronous Error from DevPanel',
-    );
-  }, 100);
-};
-
-const throwUnhandledPromise = () => {
-  Promise.reject(
-    new Error(
-      errorMessage.value ||
-        'Test Unhandled Promise Rejection from DevPanel',
-    ),
-  );
-};
 </script>
 
 <template>
   <div class="dp-plugin-container">
-    <div class="dp-view-header">
+    <div
+      class="dp-view-header"
+      style="padding: 12px 16px">
       <div class="dp-header-text">
         <h2 class="dp-plugin-title">
           Error Generator
@@ -78,79 +71,66 @@ const throwUnhandledPromise = () => {
     </div>
 
     <div class="dp-section">
-      <div
-        class="dp-setting-item"
-        style="flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 16px;">
-        <div class="dp-setting-info" style="width: 100%;">
-          <h3 class="dp-setting-title">
-            Custom Error Message
-          </h3>
-          <p class="dp-setting-desc">
-            Type a custom message for the errors generated below.
-          </p>
-        </div>
-        <input
-          v-model="errorMessage"
-          type="text"
-          class="dp-input"
-          style="width: 100%"
-          placeholder="Error text..." />
-      </div>
-
       <div class="dp-settings-group">
-
-        <div class="dp-setting-item">
-          <div class="dp-setting-info">
+        <div
+          class="dp-setting-item"
+          style="
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+          ">
+          <div
+            class="dp-setting-info"
+            style="width: 100%">
             <h3 class="dp-setting-title">
-              Synchronous Error
+              Error Type
             </h3>
             <p class="dp-setting-desc">
-              Throws a standard JS Error
-              immediately.
+              Select the type of error to generate.
             </p>
           </div>
-          <button
-            ref="syncBtnRef"
-            type="button"
-            class="dp-btn-primary dp-btn-danger">
-            Throw Error
-          </button>
+          <select
+            v-model="errorType"
+            class="dp-input"
+            style="width: 100%; cursor: pointer;">
+            <option value="sync">Synchronous Error</option>
+            <option value="async">Asynchronous Error</option>
+            <option value="promise">Unhandled Promise Rejection</option>
+          </select>
         </div>
 
-        <div class="dp-setting-item">
-          <div class="dp-setting-info">
+        <div
+          class="dp-setting-item"
+          style="
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+          ">
+          <div
+            class="dp-setting-info"
+            style="width: 100%">
             <h3 class="dp-setting-title">
-              Asynchronous Error
+              Custom Error Message
             </h3>
             <p class="dp-setting-desc">
-              Throws an error inside a setTimeout.
+              Type a custom message for the error.
             </p>
           </div>
-          <button
-            type="button"
-            class="dp-btn-primary dp-btn-danger"
-            @click="throwAsyncError">
-            Throw Error
-          </button>
+          <input
+            v-model="errorMessage"
+            type="text"
+            class="dp-input"
+            style="width: 100%"
+            placeholder="Error text..." />
         </div>
 
-        <div class="dp-setting-item">
-          <div class="dp-setting-info">
-            <h3 class="dp-setting-title">
-              Unhandled Promise Rejection
-            </h3>
-            <p class="dp-setting-desc">
-              Rejects a Promise without a catch
-              block.
-            </p>
-          </div>
-          <button
-            type="button"
-            class="dp-btn-primary dp-btn-danger"
-            @click="throwUnhandledPromise">
-            Reject Promise
-          </button>
-        </div>
+        <button
+          ref="generateBtnRef"
+          type="button"
+          class="dp-btn-primary dp-btn-danger"
+          style="width: 100%; padding: 12px; margin-top: 8px; justify-content: center; font-size: 14px;">
+          Generate Error
+        </button>
       </div>
     </div>
   </div>
