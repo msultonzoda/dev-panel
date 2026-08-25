@@ -30,6 +30,7 @@ export {
 // Plugins
 export { SystemInfoPlugin } from './plugins/system-info';
 export { ActionLogPlugin } from './plugins/action-log';
+export { ErrorGeneratorPlugin } from './plugins/error-generator';
 export {
   EnvSwitcherPlugin,
   getDevEnv,

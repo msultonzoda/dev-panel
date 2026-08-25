@@ -10,6 +10,7 @@ import {
   mountDevPanel,
   SystemInfoPlugin,
   ActionLogPlugin,
+  ErrorGeneratorPlugin,
   EnvSwitcherPlugin,
   RoleEditorPlugin,
   type EventBus,
@@ -104,6 +105,7 @@ const manager = createPanelManager({
         // В реальном проекте: userStore.role = val (или userStore.setRole(val))
       },
     }),
+    new ErrorGeneratorPlugin(),
     new ActionLogPlugin(),
   ],
 });
