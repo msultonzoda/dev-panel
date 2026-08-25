@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import type { PluginContext } from '@/types';
 
 defineOptions({
@@ -9,19 +10,32 @@ defineProps<{
   context: PluginContext;
 }>();
 
+const errorMessage = ref(
+  'Test Error from DevPanel',
+);
+
 const throwSyncError = () => {
-  throw new Error('Test Synchronous Error from DevPanel');
+  throw new Error(
+    errorMessage.value ||
+      'Test Synchronous Error from DevPanel',
+  );
 };
 
 const throwAsyncError = () => {
   setTimeout(() => {
-    throw new Error('Test Asynchronous Error from DevPanel');
+    throw new Error(
+      errorMessage.value ||
+        'Test Asynchronous Error from DevPanel',
+    );
   }, 100);
 };
 
 const throwUnhandledPromise = () => {
   Promise.reject(
-    new Error('Test Unhandled Promise Rejection from DevPanel'),
+    new Error(
+      errorMessage.value ||
+        'Test Unhandled Promise Rejection from DevPanel',
+    ),
   );
 };
 </script>
@@ -30,9 +44,12 @@ const throwUnhandledPromise = () => {
   <div class="dp-plugin-container">
     <div class="dp-view-header">
       <div class="dp-header-text">
-        <h2 class="dp-plugin-title">Error Generator</h2>
+        <h2 class="dp-plugin-title">
+          Error Generator
+        </h2>
         <p class="dp-plugin-desc">
-          Generate errors to test error tracking systems like Sentry
+          Generate errors to test error tracking
+          systems like Sentry
         </p>
       </div>
     </div>
@@ -41,30 +58,69 @@ const throwUnhandledPromise = () => {
       <div class="dp-settings-group">
         <div class="dp-setting-item">
           <div class="dp-setting-info">
-            <h3 class="dp-setting-title">Synchronous Error</h3>
-            <p class="dp-setting-desc">Throws a standard JS Error immediately.</p>
+            <h3 class="dp-setting-title">
+              Error Message
+            </h3>
+            <p class="dp-setting-desc">
+              Custom text for generated errors.
+            </p>
           </div>
-          <button type="button" class="dp-btn-primary dp-btn-danger" @click="throwSyncError">
+          <input
+            v-model="errorMessage"
+            type="text"
+            class="dp-input"
+            placeholder="Error text..." />
+        </div>
+
+        <div class="dp-setting-item">
+          <div class="dp-setting-info">
+            <h3 class="dp-setting-title">
+              Synchronous Error
+            </h3>
+            <p class="dp-setting-desc">
+              Throws a standard JS Error
+              immediately.
+            </p>
+          </div>
+          <button
+            type="button"
+            class="dp-btn-primary dp-btn-danger"
+            @click="throwSyncError">
             Throw Error
           </button>
         </div>
 
         <div class="dp-setting-item">
           <div class="dp-setting-info">
-            <h3 class="dp-setting-title">Asynchronous Error</h3>
-            <p class="dp-setting-desc">Throws an error inside a setTimeout.</p>
+            <h3 class="dp-setting-title">
+              Asynchronous Error
+            </h3>
+            <p class="dp-setting-desc">
+              Throws an error inside a setTimeout.
+            </p>
           </div>
-          <button type="button" class="dp-btn-primary dp-btn-danger" @click="throwAsyncError">
+          <button
+            type="button"
+            class="dp-btn-primary dp-btn-danger"
+            @click="throwAsyncError">
             Throw Error
           </button>
         </div>
 
         <div class="dp-setting-item">
           <div class="dp-setting-info">
-            <h3 class="dp-setting-title">Unhandled Promise Rejection</h3>
-            <p class="dp-setting-desc">Rejects a Promise without a catch block.</p>
+            <h3 class="dp-setting-title">
+              Unhandled Promise Rejection
+            </h3>
+            <p class="dp-setting-desc">
+              Rejects a Promise without a catch
+              block.
+            </p>
           </div>
-          <button type="button" class="dp-btn-primary dp-btn-danger" @click="throwUnhandledPromise">
+          <button
+            type="button"
+            class="dp-btn-primary dp-btn-danger"
+            @click="throwUnhandledPromise">
             Reject Promise
           </button>
         </div>
@@ -87,7 +143,10 @@ const throwUnhandledPromise = () => {
   justify-content: space-between;
   align-items: center;
   padding: 12px;
-  background-color: var(--dp-bg-tertiary, #1f1f2e);
+  background-color: var(
+    --dp-bg-tertiary,
+    #1f1f2e
+  );
   border-radius: 8px;
   border: 1px solid var(--dp-border, #2d2d3d);
 }
@@ -107,12 +166,31 @@ const throwUnhandledPromise = () => {
   font-size: 12px;
   color: var(--dp-text-secondary, #94a3b8);
 }
+.dp-input {
+  background-color: var(
+    --dp-bg-secondary,
+    #1a1a24
+  );
+  color: var(--dp-text-primary, #fff);
+  border: 1px solid var(--dp-border, #2d2d3d);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+  outline: none;
+  min-width: 200px;
+}
+.dp-input:focus {
+  border-color: var(--dp-primary-main, #3b82f6);
+}
 .dp-btn-danger {
   background-color: var(--dp-error-main, #ef4444);
   color: white;
   border: none;
 }
 .dp-btn-danger:hover {
-  background-color: var(--dp-error-hover, #dc2626);
+  background-color: var(
+    --dp-error-hover,
+    #dc2626
+  );
 }
 </style>
