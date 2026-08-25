@@ -152,7 +152,7 @@ export interface PanelState {
 
 export interface DevPanelOptions {
   trigger: TriggerAdapter;
-  auth: AuthAdapter;
+  auth?: AuthAdapter;
   session: SessionAdapter;
   config: ConfigAdapter;
   plugins: DevPanelPlugin[];

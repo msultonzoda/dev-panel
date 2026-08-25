@@ -3,6 +3,7 @@ import type {
   DevPanelOptions,
   PanelState,
   EventBus,
+  AuthAdapter,
 } from '@/types';
 import { createEventBus } from '@/core/events/event-bus';
 import { createPanelState } from '@/core/state/panel-state';
@@ -48,6 +49,23 @@ export function createPanelManager(
     string,
     Component
   >();
+
+  const authAdapter: AuthAdapter = options.auth || {
+    requiresInteraction: false,
+    async authenticate() {
+      return {
+        success: true,
+        session: {
+          token: 'none',
+          user: { name: 'Guest', role: 'guest' },
+        },
+      };
+    },
+    async restoreSession() {
+      return null;
+    },
+    async logout() {},
+  };
 
   const shouldPersist =
     options.persistState !== false;
@@ -120,9 +138,9 @@ export function createPanelManager(
     const existingSession = options.session.get();
     if (existingSession) {
       // Валидация, если адаптер поддерживает
-      if (options.auth.validateSession) {
+      if (authAdapter.validateSession) {
         const isValid =
-          await options.auth.validateSession(
+          await authAdapter.validateSession(
             existingSession,
           );
         if (isValid) {
@@ -149,7 +167,7 @@ export function createPanelManager(
 
     // 2. Попытка restoreSession через auth adapter
     const restoredSession =
-      await options.auth.restoreSession();
+      await authAdapter.restoreSession();
     if (restoredSession) {
       state.session = restoredSession;
       state.isAuthenticated = true;
@@ -162,10 +180,10 @@ export function createPanelManager(
     }
 
     // 3. Автоматическая авторизация (без UI)
-    if (!options.auth.requiresInteraction) {
+    if (!authAdapter.requiresInteraction) {
       try {
         const result =
-          await options.auth.authenticate();
+          await authAdapter.authenticate();
         if (result.success && result.session) {
           state.session = result.session;
           state.isAuthenticated = true;
@@ -198,7 +216,7 @@ export function createPanelManager(
 
       if (
         !isAuthed &&
-        options.auth.requiresInteraction
+        authAdapter.requiresInteraction
       ) {
         // UI-слой должен показать auth модал
         // PanelManager устанавливает состояние, UI реагирует
@@ -358,7 +376,7 @@ export function createPanelManager(
 
     try {
       const result =
-        await options.auth.authenticate(
+        await authAdapter.authenticate(
           credentials,
         );
 
