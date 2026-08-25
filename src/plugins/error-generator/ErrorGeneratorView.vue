@@ -78,22 +78,26 @@ const throwUnhandledPromise = () => {
     </div>
 
     <div class="dp-section">
-      <div class="dp-settings-group">
-        <div class="dp-setting-item">
-          <div class="dp-setting-info">
-            <h3 class="dp-setting-title">
-              Error Message
-            </h3>
-            <p class="dp-setting-desc">
-              Custom text for generated errors.
-            </p>
-          </div>
-          <input
-            v-model="errorMessage"
-            type="text"
-            class="dp-input"
-            placeholder="Error text..." />
+      <div
+        class="dp-setting-item"
+        style="flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 16px;">
+        <div class="dp-setting-info" style="width: 100%;">
+          <h3 class="dp-setting-title">
+            Custom Error Message
+          </h3>
+          <p class="dp-setting-desc">
+            Type a custom message for the errors generated below.
+          </p>
         </div>
+        <input
+          v-model="errorMessage"
+          type="text"
+          class="dp-input"
+          style="width: 100%"
+          placeholder="Error text..." />
+      </div>
+
+      <div class="dp-settings-group">
 
         <div class="dp-setting-item">
           <div class="dp-setting-info">
@@ -201,7 +205,7 @@ const throwUnhandledPromise = () => {
   font-size: 13px;
   outline: none;
   min-width: 200px;
-  width: 100%;
+  width: 60%;
 }
 .dp-input:focus {
   border-color: var(--dp-primary-main, #3b82f6);
