@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import type { PluginContext } from '@/types';
 
 defineOptions({
@@ -10,16 +10,22 @@ defineProps<{
   context: PluginContext;
 }>();
 
-const errorMessage = ref(
-  'Test Error from DevPanel',
-);
+const errorMessage = ref('Test Error from DevPanel');
+const syncBtnRef = ref<HTMLButtonElement | null>(null);
 
-const throwSyncError = () => {
-  throw new Error(
-    errorMessage.value ||
-      'Test Synchronous Error from DevPanel',
-  );
+const handleNativeClick = () => {
+  throw new Error(errorMessage.value || 'Test Synchronous Error from DevPanel');
 };
+
+onMounted(() => {
+  // Навешиваем нативный обработчик, чтобы ошибка не перехватывалась 
+  // Vue ErrorBoundary (onErrorCaptured) и улетала прямиком в Sentry/window.onerror
+  syncBtnRef.value?.addEventListener('click', handleNativeClick);
+});
+
+onBeforeUnmount(() => {
+  syncBtnRef.value?.removeEventListener('click', handleNativeClick);
+});
 
 const throwAsyncError = () => {
   setTimeout(() => {
@@ -83,9 +89,9 @@ const throwUnhandledPromise = () => {
             </p>
           </div>
           <button
+            ref="syncBtnRef"
             type="button"
-            class="dp-btn-primary dp-btn-danger"
-            @click="throwSyncError">
+            class="dp-btn-primary dp-btn-danger">
             Throw Error
           </button>
         </div>
@@ -178,6 +184,7 @@ const throwUnhandledPromise = () => {
   font-size: 13px;
   outline: none;
   min-width: 200px;
+  width: 100%;
 }
 .dp-input:focus {
   border-color: var(--dp-primary-main, #3b82f6);
